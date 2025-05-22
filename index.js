@@ -9,14 +9,26 @@
 
 /** @type {Item[]} */
 const inventory = [
-  { id: 1, name: "apple", price: 1.75, category: "fruit", quantity: 100 },
-  { id: 2, name: "banana", price: 0.25, category: "fruit", quantity: 137 },
-  { id: 3, name: "orange", price: 1.0, category: "fruit", quantity: 10 },
-  { id: 4, name: "broccoli", price: 3.0, category: "vegetable", quantity: 67 },
-  { id: 5, name: "carrots", price: 2.25, category: "vegetable", quantity: 94 },
-  { id: 6, name: "milk", price: 5.75, category: "dairy", quantity: 90 },
-  { id: 7, name: "cheddar", price: 4.0, category: "dairy", quantity: 63 },
-  { id: 8, name: "sourdough", price: 5.5, category: "grains", quantity: 81 },
+    { id: 1, name: "apple", price: 1.75, category: "fruit", quantity: 100 },
+    { id: 2, name: "banana", price: 0.25, category: "fruit", quantity: 137 },
+    { id: 3, name: "orange", price: 1.0, category: "fruit", quantity: 10 },
+    {
+        id: 4,
+        name: "broccoli",
+        price: 3.0,
+        category: "vegetable",
+        quantity: 67,
+    },
+    {
+        id: 5,
+        name: "carrots",
+        price: 2.25,
+        category: "vegetable",
+        quantity: 94,
+    },
+    { id: 6, name: "milk", price: 5.75, category: "dairy", quantity: 90 },
+    { id: 7, name: "cheddar", price: 4.0, category: "dairy", quantity: 63 },
+    { id: 8, name: "sourdough", price: 5.5, category: "grains", quantity: 81 },
 ];
 
 // === Complete the functions below! ===
@@ -26,7 +38,7 @@ const inventory = [
  * @param {Item[]} items - array of items
  */
 function logNames(items) {
-  // TODO: use `forEach`
+    items.map((item) => item.name).forEach((name) => console.log(name));
 }
 
 /**
@@ -34,7 +46,7 @@ function logNames(items) {
  * @returns {string[]} an array of item names in all uppercase
  */
 function getUppercaseNames(items) {
-  // TODO: use `map`
+    return items.map((item) => item.name).map((name) => name.toUpperCase());
 }
 
 /**
@@ -43,7 +55,7 @@ function getUppercaseNames(items) {
  * @returns {Item} - the item in `items` with the given `id`
  */
 function getItemById(items, id) {
-  // TODO: use `find`
+    return items.find((item) => item.id === id);
 }
 
 /**
@@ -52,7 +64,13 @@ function getItemById(items, id) {
  * @returns {number} the price of the item named `name` if found
  */
 function getItemPriceByName(items, name) {
-  // TODO: use a loop!
+    for (let item of items) {
+        if (item.name === name) {
+            return item.price;
+        }
+    }
+    console.log(`error - can't find item named ${name}`);
+    return 0;
 }
 
 /**
@@ -61,7 +79,7 @@ function getItemPriceByName(items, name) {
  * @returns {Item[]} array of items that belong to the given `category`
  */
 function getItemsByCategory(items, category) {
-  // TODO: use `filter`
+    return items.filter((item) => item.category === category);
 }
 
 /**
@@ -69,7 +87,7 @@ function getItemsByCategory(items, category) {
  * @returns {number} the total quantity of all items
  */
 function countItems(items) {
-  // TODO: use `reduce`
+    return items.reduce((acc, item) => acc + item.quantity, 0);
 }
 
 /**
@@ -77,7 +95,7 @@ function countItems(items) {
  * @returns {number} the cost of all given items
  */
 function getTotalPrice(items) {
-  // TODO: use `reduce`
+    return items.reduce((acc, item) => acc + item.price, 0);
 }
 
 // === READ BUT DO NOT CHANGE THE CODE BELOW ===
@@ -92,7 +110,7 @@ console.log(`In total, we have ${countItems(inventory)} items in stock.`);
 
 const totalCost = getTotalPrice(inventory);
 console.log(
-  `It would cost $${totalCost?.toFixed(2)} to purchase everything in stock.`
+    `It would cost $${totalCost?.toFixed(2)} to purchase everything in stock.`
 );
 
 const itemId = prompt("Enter the ID of an item:", "1");
@@ -101,7 +119,7 @@ console.log(getItemById(inventory, +itemId));
 
 const itemName = prompt("Enter the name of an item:", "apple");
 console.log(
-  `The price of ${itemName} is ${getItemPriceByName(inventory, itemName)}.`
+    `The price of ${itemName} is ${getItemPriceByName(inventory, itemName)}.`
 );
 
 const category = prompt("Enter a category you would like to see:", "fruit");
